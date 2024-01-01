@@ -1,6 +1,9 @@
 <script>
 	// let steamGuard = 'Not Provided';
-    import { Icon, Pencil } from 'svelte-hero-icons'
+    import { Icon, Pencil, User } from 'svelte-hero-icons'
+	import UsersTable from '../components/UsersTable.svelte';
+
+    export let form
 
 	let users = [
 		{
@@ -44,8 +47,12 @@
 							<td>{user.password} <Icon src="{Pencil}" size="20" /></td>
 							<td><button class="secondary">Enter Steam Guard</button></td>
 							<td>
-                                <button class="primary">Start</button>
-								<button class="outline secondary">Delete</button>
+                                <form action="#" method="POST">
+                                    <input type="hidden" name="username" value={user.username}>
+                                    <input type="hidden" name="password" value={user.password}>
+                                    <UsersTable />
+                                    <button class="outline secondary">Delete</button>
+                                </form>
                             </td>
 						</tr>
 					{/each}
@@ -54,3 +61,5 @@
 		</article>
 	</div>
 </main>
+
+{form?.started}
